@@ -75,7 +75,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.fallback()
 
     def handleNCSI(self):
-        body = "Microsoft NCSI"
+        body = b"Microsoft NCSI"
         self.send_response(200)
         self.send_header("Content-Type", "text/plain")
         self.send_header("Content-Length", str(len(body)))
@@ -84,7 +84,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def handleConnectTest(self):
-        body = "Microsoft Connect Test"
+        body = b"Microsoft Connect Test"
         self.send_response(200)
         self.send_header("Content-Type", "text/plain")
         self.send_header("Content-Length", str(len(body)))
@@ -161,7 +161,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 
 # Start HTTP server
-server = ThreadingHTTPServer(("0.0.0.0", 8080), RequestHandler)
+server = ThreadingHTTPServer(("0.0.0.0", 80), RequestHandler)
 
 print("HTTP Echo Server running at http://localhost:8080")
 print(f"Saving received files to: {OUTPUT_DIR}")
