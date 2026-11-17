@@ -49,7 +49,12 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         #self.fallback()
-        self.servePayload()
+        if self.path == "/connecttest.txt":
+            self.handleConnectTest()
+        elif self.path == "/ncsi.txt":
+            self.handleNCSI()
+        else:
+            self.servePayload()
 
     def do_POST(self):
         self.handleMessage()
@@ -69,6 +74,23 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_HEAD(self):
         self.fallback()
 
+    def handleNCSI(self):
+        body = "Microsoft NCSI"
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def handleConnectTest(self):
+        body = "Microsoft Connect Test"
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        self.wfile.write(body)
 
     def serve_file(self, filepath):
         filepath = Path(filepath)
