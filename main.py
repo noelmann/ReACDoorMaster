@@ -30,7 +30,7 @@ def saveReceivedData(type_id, data):
     if type_id == "0":
         filepath = OUTPUT_DIR / (filename+extension)
     elif type_id == "1":
-        extension = ".png"
+        extension = ".jpg"
         imageDirectory = OUTPUT_DIR / "images"
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
         filename = f"{timestamp}"
