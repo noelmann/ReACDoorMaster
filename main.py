@@ -7,6 +7,7 @@ import threading
 
 
 KEY = b"secretkey"
+port = 80
 OUTPUT_DIR = Path(__file__).resolve().parent
 file_lock = threading.Lock()
 
@@ -53,6 +54,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.handleConnectTest()
         elif self.path == "/ncsi.txt":
             self.handleNCSI()
+        elif self.path == "/index.html":
+            self.fallback()
         else:
             self.servePayload()
 
@@ -161,9 +164,9 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 
 # Start HTTP server
-server = ThreadingHTTPServer(("0.0.0.0", 80), RequestHandler)
+server = ThreadingHTTPServer(("0.0.0.0", port), RequestHandler)
 
-print("HTTP Echo Server running at http://localhost:8080")
+print("ReACDoorMaster HTTP Server running at http://localhost:"+str(port))
 print(f"Saving received files to: {OUTPUT_DIR}")
 
 try:
